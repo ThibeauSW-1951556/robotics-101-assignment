@@ -16,7 +16,9 @@ public class IK_Calculator
     {
         if (targetPoint3D == Vector3.zero) return Vector3.zero;
 
-        float theta = 0; // Joint 1 Angle (Base Rotation)
+        //float theta = 0; // Joint 1 Angle (Base Rotation)
+        float theta = Mathf.Atan2(targetPoint3D.x, targetPoint3D.z) * Mathf.Rad2Deg;
+
         float gamma = 0;// Joint 2 Angle
         float alpha = 0;// Joint 3 Angle
 
