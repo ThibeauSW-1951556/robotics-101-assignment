@@ -22,7 +22,7 @@ public class IK_Calculator
 
         // Project the target point onto the arm's plane for IK calculation
         float projectedX = Mathf.Sqrt(targetPoint3D.x * targetPoint3D.x + targetPoint3D.z * targetPoint3D.z);
-        float projectedY = targetPoint3D.y - 3;
+        float projectedY = targetPoint3D.y - 3.5f; // to not clip (look into this later cause left doesn't seem to clip at the same time as right)
 
         // Calculate Euclidean distance to the target
         float targetDistance = Mathf.Sqrt(projectedX * projectedX + projectedY * projectedY);
