@@ -16,13 +16,12 @@ public class IK_Calculator
     {
         if (targetPoint3D == Vector3.zero) return Vector3.zero;
 
-        //float theta = 0; // Joint 1 Angle (Base Rotation)
+        // Joint 1 Angle (Base Rotation)
         float theta = Mathf.Atan2(targetPoint3D.x, targetPoint3D.z) * Mathf.Rad2Deg;
 
          // Project the target point onto the arm's plane for IK calculation
         float projectedX = Mathf.Sqrt(targetPoint3D.x * targetPoint3D.x + targetPoint3D.z * targetPoint3D.z);
         float projectedY = targetPoint3D.y;
-        
         
         // Calculate Euclidean distance to the target
         float targetDistance = Mathf.Sqrt(projectedX * projectedX + projectedY * projectedY);
@@ -51,7 +50,12 @@ public class IK_Calculator
         }
 
         float gamma = 0;// Joint 2 Angle (shoulder)
-        float alpha = 0;// Joint 3 Angle (elbow)
+        
+        // Joint 3 Angle (elbow)
+        float cosAlpha = (L2 * L2 + L3 * L3 - x * x - y * y) / (2 * L2 * L3); //already did -L1 when setting y as value
+        cosAlpha = Mathf.Clamp(cosAlpha, -1f, 1f); // Ensure valid range for acos
+        float alpha = Mathf.Acos(cosAlpha) * Mathf.Rad2Deg; // Convert to degrees
+
 
         var targetAngles = new Vector3(theta, gamma, alpha);
 
