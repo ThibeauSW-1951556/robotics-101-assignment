@@ -50,8 +50,8 @@ public class IK_Calculator
             distanceJ2ToTarget = L2 + L3 - 0.001f;
         }
 
-        float gamma = 0;// Joint 2 Angle
-        float alpha = 0;// Joint 3 Angle
+        float gamma = 0;// Joint 2 Angle (shoulder)
+        float alpha = 0;// Joint 3 Angle (elbow)
 
         var targetAngles = new Vector3(theta, gamma, alpha);
 
