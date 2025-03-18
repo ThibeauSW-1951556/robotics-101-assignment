@@ -22,7 +22,7 @@ public class IK_Calculator
 
         // Project the target point onto the arm's plane for IK calculation
         float projectedX = Mathf.Sqrt(targetPoint3D.x * targetPoint3D.x + targetPoint3D.z * targetPoint3D.z);
-        float projectedY = targetPoint3D.y;
+        float projectedY = targetPoint3D.y - 3;
 
         // Calculate Euclidean distance to the target
         float targetDistance = Mathf.Sqrt(projectedX * projectedX + projectedY * projectedY);
@@ -57,22 +57,22 @@ public class IK_Calculator
 
     public float CalculateY2(float x, float y)
     {
-        // Compute γ₂₁
+        // Compute γ21
         float gamma21 = 90f; // Given as 90° in the diagram
 
-        // Compute γ₂₂
+        // Compute γ22
         float gamma22 = Mathf.Atan2(y - L1, x) * Mathf.Rad2Deg;
 
         // Compute 'a' using the Euclidean distance formula
         float aSquared = x * x + (y - L1) * (y - L1);
         float a = Mathf.Sqrt(aSquared);
 
-        // Compute γ₂₃ using the cosine rule
+        // Compute γ23 using the cosine rule
         float cosGamma23 = (aSquared + L2 * L2 - L3 * L3) / (2 * a * L2);
         cosGamma23 = Mathf.Clamp(cosGamma23, -1f, 1f);
         float gamma23 = Mathf.Acos(cosGamma23) * Mathf.Rad2Deg;
 
-        // Compute γ₂
+        // Compute γ2
         float gamma2 = gamma21 + gamma22 + gamma23;
 
         return gamma2;
