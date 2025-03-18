@@ -1,8 +1,8 @@
 using System;
+using System.Globalization;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 public class RobotController
 {
@@ -71,7 +71,15 @@ public class RobotController
     {
         if (!isConnected) return;
 
-        string userCommand = string.Format("CMD Move Joint {0:0} {1:0} {2:0} {3:0} {4:0} {5:0} 0 0 0 {6}", -jointAngles[0], jointAngles[1], jointAngles[2], jointAngles[3], jointAngles[4], jointAngles[5], velocity);
+        string userCommand = string.Format("CMD Move Joint {0} {1} {2} {3} {4} {5} 0 0 0 {6}",
+            (-jointAngles[0]).ToString("F2", CultureInfo.InvariantCulture),
+            jointAngles[1].ToString("F2", CultureInfo.InvariantCulture),
+            jointAngles[2].ToString("F2", CultureInfo.InvariantCulture),
+            jointAngles[3].ToString("F2", CultureInfo.InvariantCulture),
+            jointAngles[4].ToString("F2", CultureInfo.InvariantCulture),
+            jointAngles[5].ToString("F2", CultureInfo.InvariantCulture),
+            velocity.ToString("F2", CultureInfo.InvariantCulture));
+
         SendCommand(userCommand);
     }
 
